@@ -23,23 +23,23 @@ public class TrackingServiceImpl implements TrackingService {
     @Override
     public TrackingResponse getMessageTracking(Long messageId) {
 
-        // Step 1: Fetch Message
+
         Message message = messageRepository.findById(messageId)
                 .orElseThrow(() ->
                         new RuntimeException("Message not found with id: " + messageId));
 
-        // Step 2: Fetch all deliveries for this message
+
         List<MessageDelivery> deliveries =
                 messageDeliveryRepository.findByMessage(message);
 
-        // Step 3: Map deliveries → DTO
+
         List<TrackingResponse.ChannelTracking> channelTrackings =
                 deliveries.stream()
                         .map(delivery -> TrackingResponse.ChannelTracking.builder()
                                 .channelType(delivery.getChannelType())
                                 .status(delivery.getStatus())
 
-                                // ✅ FIX: no null check needed (int primitive)
+
                                 .attempts(delivery.getAttemptCount())
 
                                 .lastAttemptAt(delivery.getUpdatedAt())
@@ -47,10 +47,10 @@ public class TrackingServiceImpl implements TrackingService {
                                 .build())
                         .collect(Collectors.toList());
 
-        // Step 4: Compute overall status
+
         MessageStatus overallStatus = resolveOverallStatus(deliveries);
 
-        // Step 5: Build response
+
         return TrackingResponse.builder()
                 .messageId(message.getId())
                 .subject(message.getSubject())
@@ -60,9 +60,7 @@ public class TrackingServiceImpl implements TrackingService {
                 .build();
     }
 
-    /**
-     * Derives overall message status from channel-level results
-     */
+
     private MessageStatus resolveOverallStatus(List<MessageDelivery> deliveries) {
 
         if (deliveries == null || deliveries.isEmpty()) {

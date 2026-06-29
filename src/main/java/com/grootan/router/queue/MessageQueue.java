@@ -12,9 +12,7 @@ public class MessageQueue {
     private final BlockingQueue<QueuedMessage> queue =
             new LinkedBlockingQueue<>();
 
-    /**
-     * Add message to queue.
-     */
+
     public void enqueue(QueuedMessage queuedMessage) {
 
         try {
@@ -37,9 +35,7 @@ public class MessageQueue {
 
     }
 
-    /**
-     * Remove next message.
-     */
+
     public QueuedMessage dequeue() {
 
         try {

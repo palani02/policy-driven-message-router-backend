@@ -22,9 +22,7 @@ public class SmsServiceImpl implements SmsService {
     @Value("${twilio.phone.number}")
     private String twilioPhoneNumber;
 
-    /**
-     * Initialize Twilio once when Spring starts
-     */
+
     @PostConstruct
     public void initTwilio() {
         Twilio.init(accountSid, authToken);
@@ -84,7 +82,7 @@ public class SmsServiceImpl implements SmsService {
             return phone;
         }
 
-        // default India format (you can generalize later)
+
         return "+91" + phone;
     }
 }

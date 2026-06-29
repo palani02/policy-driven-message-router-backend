@@ -13,9 +13,7 @@ public class TrackingController {
 
     private final TrackingService trackingService;
 
-    /**
-     * Get message tracking details by messageId
-     */
+
     @GetMapping("/{messageId}")
     public ResponseEntity<TrackingResponse> getTracking(
             @PathVariable Long messageId) {

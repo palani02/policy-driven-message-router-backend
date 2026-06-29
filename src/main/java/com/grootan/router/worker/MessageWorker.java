@@ -62,10 +62,7 @@ public class MessageWorker {
                                 message
                         );
 
-                        /*
-                         * Requirement:
-                         * Fallback to Email if SMS fails
-                         */
+
                         if (!success && channelType == ChannelType.SMS) {
 
                             boolean emailAlreadyRequested =
@@ -110,9 +107,7 @@ public class MessageWorker {
         workerThread.start();
     }
 
-    /**
-     * Processes one delivery channel.
-     */
+
     private boolean processChannel(
             ChannelType channelType,
             User user,
@@ -152,9 +147,7 @@ public class MessageWorker {
         return success;
     }
 
-    /**
-     * Retry sending through a channel.
-     */
+
     private boolean sendWithRetry(
             Channel channel,
             User user,
@@ -214,9 +207,7 @@ public class MessageWorker {
             }
         }
 
-        /*
-         * Dead Letter Queue
-         */
+
         DeadLetterMessage deadLetter = DeadLetterMessage.builder()
                 .messageDelivery(delivery)
                 .reason(delivery.getFailureReason())

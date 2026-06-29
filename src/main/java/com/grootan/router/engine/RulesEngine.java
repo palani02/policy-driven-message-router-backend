@@ -19,11 +19,6 @@ public class RulesEngine {
         List<ChannelType> channels = new ArrayList<>();
         MessageType messageType = message.getMessageType();
 
-        /*
-         * Rule 1
-         * Critical Alerts
-         * Always EMAIL + SMS
-         */
         if (messageType == MessageType.CRITICAL) {
             channels.add(ChannelType.EMAIL);
             channels.add(ChannelType.SMS);
@@ -33,11 +28,7 @@ public class RulesEngine {
                     .build();
         }
 
-        /*
-         * Rule 2
-         * Promotions
-         * Only EMAIL
-         */
+
         if (messageType == MessageType.PROMOTION) {
             channels.add(ChannelType.EMAIL);
 
@@ -46,11 +37,7 @@ public class RulesEngine {
                     .build();
         }
 
-        /*
-         * Rule 3
-         * OTP
-         * Prefer SMS
-         */
+
         if (messageType == MessageType.OTP) {
             channels.add(ChannelType.SMS);
 
@@ -59,11 +46,7 @@ public class RulesEngine {
                     .build();
         }
 
-        /*
-         * Rule 4
-         * Reminder / General
-         * Respect User Preferences
-         */
+
         if (preference.getEmailEnabled()) {
             channels.add(ChannelType.EMAIL);
         }
@@ -72,12 +55,7 @@ public class RulesEngine {
             channels.add(ChannelType.SMS);
         }
 
-        /*
-         * Rule 5
-         * Time of Day (Basic Example)
-         * If no channel selected and it's daytime,
-         * use EMAIL as fallback.
-         */
+
         if (channels.isEmpty()) {
 
             LocalTime now = LocalTime.now();
