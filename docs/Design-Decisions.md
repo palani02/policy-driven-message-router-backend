@@ -440,25 +440,7 @@ Future Improvement
 
 ---
 
-# Future Enhancements
 
-The current architecture is designed for extensibility.
-
-Potential improvements include:
-
-- RabbitMQ or Apache Kafka for distributed messaging
-- Redis-backed queue
-- OpenTelemetry distributed tracing
-- Prometheus and Grafana metrics
-- Rule management through a database
-- Notification templates
-- Template rendering engine
-- Scheduled message delivery
-- Bulk message processing
-- Kubernetes deployment
-- Distributed worker nodes
-- Role-based administration
-- Monitoring dashboard
 
 ---
 
